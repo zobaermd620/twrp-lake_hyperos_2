@@ -61,6 +61,13 @@ on property:crypto.ready=0
 on property:twrp.modules.loaded=true 
     start vendor.vibrator-default
 
+# --- ✅ USB + MTP config for TWRP ---
 on boot
     start boot-hal-1-2
     start health-hal-2-1
+
+    # Setup USB + MTP
+    setprop sys.usb.config mtp,adb
+    setprop persist.sys.usb.config mtp,adb
+    setprop sys.usb.controller musb-hdrc
+    setprop sys.usb.configfs 1
