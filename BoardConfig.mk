@@ -95,6 +95,7 @@ BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_MAIN_SIZE := 9122611200 # (BOARD_SUPER_PARTITION_SIZE - 4194304) 4MiB
 BOARD_MAIN_PARTITION_LIST := system system_ext product vendor
 BOARD_QTI_DYNAMIC_PARTITIONS_LIST := system system_ext vendor product odm vendor_dlkm system_dlkm  # Added DLKM
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200
 
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_SYSTEM := system
