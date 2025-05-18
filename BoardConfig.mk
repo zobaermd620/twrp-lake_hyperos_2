@@ -53,19 +53,21 @@ BOARD_RAMDISK_OFFSET      := 0x07c08000
 BOARD_TAGS_OFFSET         := 0x0bc08000
 BOARD_DTB_OFFSET          := 0x0bc08000
 
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 
+
+# BOARD_MKBOOTIMG_ARGS - removed --dtb line!
 BOARD_MKBOOTIMG_ARGS += \
-	--dtb $(TARGET_PREBUILT_DTB) \
-	--vendor_cmdline $(BOARD_VENDOR_CMDLINE) \
-	--pagesize $(BOARD_PAGE_SIZE) --board "" \
-	--kernel_offset $(BOARD_KERNEL_OFFSET) \
-	--ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
-	--tags_offset $(BOARD_TAGS_OFFSET) \
-	--header_version $(BOARD_BOOT_HEADER_VERSION) \
-	--dtb_offset $(BOARD_DTB_OFFSET)
+  --vendor_cmdline $(BOARD_VENDOR_CMDLINE) \
+  --pagesize $(BOARD_PAGE_SIZE) --board "" \
+  --kernel_offset $(BOARD_KERNEL_OFFSET) \
+  --ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
+  --tags_offset $(BOARD_TAGS_OFFSET) \
+  --header_version $(BOARD_BOOT_HEADER_VERSION) \
+  --dtb_offset $(BOARD_DTB_OFFSET)
 
+BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_RAMDISK_USE_LZ4 := true
 
