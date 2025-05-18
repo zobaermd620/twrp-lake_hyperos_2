@@ -1,12 +1,29 @@
-#<src>                                  <mnt_point>            <type> <mnt_flags>             <fs_mgr_flags>
+# <src>                                  <mnt_point>            <type>  <mnt_flags>             <fs_mgr_flags>
 system                                  /system                erofs   ro,barrier=1,discard    wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
 vendor                                  /vendor                erofs   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
 product                                 /product               erofs   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
-system_ext                              /system_ext            ext4   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
-mi_ext                                  /mi_ext                ext4   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
-/dev/block/by-name/metadata             /metadata              ext4                           noatime,nosuid,nodev,discard wait,check,formattable
-/dev/block/by-name/userdata             /data                  f2fs                           noatime,nosuid,nodev,discard,noflush_merge,checkpoint_merge,reserve_root=134217,resgid=1065,fsync_mode=nobarrier,gc_merge,atgc,inlinecrypt wait,check,formattable,quota,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
-/dev/block/by-name/rescue               /cache                 ext4   auto                    noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable
+system_ext                              /system_ext            erofs   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
+vendor_dlkm                             /vendor_dlkm           erofs   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
+odm_dlkm                                /odm_dlkm              erofs   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
+system_dlkm                             /system_dlkm           erofs   ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
+mi_ext                                  /mi_ext                ext4    ro,barrier=1,discard    wait,slotselect,avb,logical,first_stage_mount
+
+# Data & Metadata (unchanged)
+/dev/block/by-name/metadata             /metadata              ext4    noatime,nosuid,nodev,discard wait,check,formattable
+/dev/block/by-name/userdata             /data                  f2fs    noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt,gc_merge,atgc wait,check,formattable,quota,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
+/dev/block/by-name/rescue               /cache                 ext4    noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable
+
+
+
+
+
+
+/dev/block/by-name/vbmeta_system        /vbmeta_system         emmc   defaults                first_stage_mount,nofail,slotselect,avb=vbmeta
+
+/dev/block/by-name/boot                 /boot                  emmc   defaults                first_stage_mount,nofail,slotselect
+/dev/block/by-name/vbmeta_vendor        /vbmeta_vendor         emmc   defaults                first_stage_mount,nofail,slotselect
+
+#<src>                                  <mnt_point>            <type> <mnt_flags>             <fs_mgr_flags>
 /dev/block/by-name/frp                  /persistent            emmc   defaults                defaults
 /dev/block/by-name/nvram                /nvram                 emmc   defaults                defaults
 /dev/block/by-name/proinfo              /proinfo               emmc   defaults                defaults
@@ -14,9 +31,6 @@ mi_ext                                  /mi_ext                ext4   ro,barrier
 /dev/block/by-name/bootloader2          /bootloader2           emmc   defaults                defaults
 /dev/block/by-name/para                 /para                  emmc   defaults                defaults
 /dev/block/by-name/misc                 /misc                  emmc   defaults                defaults
-/dev/block/by-name/boot                 /boot                  emmc   defaults                first_stage_mount,nofail,slotselect
-/dev/block/by-name/vbmeta_vendor        /vbmeta_vendor         emmc   defaults                first_stage_mount,nofail,slotselect
-/dev/block/by-name/vbmeta_system        /vbmeta_system         emmc   defaults                first_stage_mount,nofail,slotselect,avb=vbmeta
 /dev/block/by-name/logo_a               /logo                  emmc   defaults                defaults
 /dev/block/by-name/expdb                /expdb                 emmc   defaults                defaults
 /dev/block/by-name/seccfg               /seccfg                emmc   defaults                defaults
